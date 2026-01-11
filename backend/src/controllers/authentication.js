@@ -4,6 +4,8 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import UserModel from '../models/User.js'
 
+
+// Add Zod Validation 
 export async function register (req,res){
     try{
 
