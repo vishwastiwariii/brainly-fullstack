@@ -2,7 +2,7 @@
 
 import express from "express"
 import { rateLimit } from "express-rate-limit"
-import { authenticate } from "../middlewares/authMiddleware"
+import { authenticate } from "../middlewares/authMiddleware.js"
 
 
 let limiter = rateLimit(

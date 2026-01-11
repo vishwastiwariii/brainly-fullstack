@@ -3,15 +3,22 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import UserModel from '../models/User.js'
+import { loginSchema, signupSchema } from '../validators/authValidators.js';
 
 
-// Add Zod Validation 
+// Add Zod Validation - Done
+
 export async function register (req,res){
     try{
 
-        const username = req.body.username;
-        const email = req.body.email;
-        const password = req.body.password; 
+        const parsed = signupSchema.safeParse(req.body || {})
+
+        if (!parsed.success) return res.status(400).json({
+            message: parsed.error,
+            errors: parsed.error.errors
+        });
+
+        const { username, email, password} = parsed.data
 
         if(!username || username.length <= 5){
           return res.status(403).json({ 
@@ -21,7 +28,7 @@ export async function register (req,res){
         
         if (!password || password.length<=8){
             return res.status(403).json({
-                message: 'Password must be more than 8 characters long.'
+                message: 'Password must be more than 6 characters long.'
             })
         } 
 
@@ -54,7 +61,14 @@ export async function register (req,res){
 
 export async function login(req,res){
     try{
-        const {email,password} = req.body; 
+        const parsed = loginSchema.safeParse(req.body || {})
+
+        if (!parsed.success) return res.status(400).json({
+            message: parsed.error,
+            errors: parsed.error.errors
+        });
+
+        const {email,password} = parsed.data; 
 
         const user = await UserModel.findOne({
             email: email
@@ -74,7 +88,7 @@ export async function login(req,res){
             })
         }
 
-        const token = await jwt.sign({
+        const token = jwt.sign({
             userId: user._id.toString(),
         },process.env.JWT_SECRET);
 
