@@ -9,7 +9,7 @@ const CategorySchema = new Schema(
         unique: true
     }, 
 
-    user: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     }

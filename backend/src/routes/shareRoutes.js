@@ -17,7 +17,7 @@ const router = express.Router()
 // share routes
 
 router.post('/generate', limiter, authenticate)  //generates a sharable link with a shareId
-router.get('/:shareId', limiter)       
+router.get('/:hash', limiter)       
 
 
 export default router

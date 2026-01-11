@@ -3,7 +3,7 @@ import { Schema } from "mongoose";
 
 const CardSchema = new Schema(
 {
-    user: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },
