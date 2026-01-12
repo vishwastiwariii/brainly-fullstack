@@ -16,9 +16,9 @@ const router = express.Router()
 // category Routes
 
 router.get('/', limiter, authenticate)    // show all categories
-router.patch('/update/:id', limiter, authenticate)  // updates a category
+router.patch('/update/:categoryid', limiter, authenticate)  // updates a category
 router.post('/create', limiter, authenticate)    // create a new category
-router.delete('/delete/:id', limiter, authenticate) // delete a category
+router.delete('/delete/:categoryid', limiter, authenticate) // delete a category
 
 
 export default router
