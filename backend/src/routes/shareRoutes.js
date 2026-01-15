@@ -2,8 +2,6 @@ import express from "express"
 import rateLimit from "express-rate-limit"
 import { authenticate } from "../middlewares/authMiddleware.js"
 
-
-
 let limiter = rateLimit({
     max: 50,
     windowMs: 60 * 60 * 1000,

@@ -143,7 +143,7 @@ export async function deleteCategory(req, res){
         const category = await Category.findById(categoryId)
 
         if(!category.userId.toString() == req.userId.toString()){
-            return res.status(400).json({
+            return res.status(403).json({
                 message: "User not authorized"
             })
         }
@@ -161,7 +161,7 @@ export async function deleteCategory(req, res){
 
         await category.deleteOne()
 
-        return res.status(201).json({
+        return res.status(200).json({
             message: "Category Deleted"
         })
 

@@ -1,6 +1,7 @@
 import express from "express"
 import { rateLimit } from "express-rate-limit"
 import { authenticate } from "../middlewares/authMiddleware.js"
+import { createCategory, deleteCategory, getAllCategory, updateCategory } from "../controllers/categoryController.js"
 
 let limiter = rateLimit(
     {
@@ -15,10 +16,10 @@ const router = express.Router()
 
 // category Routes
 
-router.get('/', limiter, authenticate)    // show all categories
-router.patch('/update/:categoryid', limiter, authenticate)  // updates a category
-router.post('/create', limiter, authenticate)    // create a new category
-router.delete('/delete/:categoryid', limiter, authenticate) // delete a category
+router.get('/', limiter, authenticate, getAllCategory)    // show all categories
+router.patch('/update/:categoryid', limiter, authenticate, updateCategory)  // updates a category
+router.post('/create', limiter, authenticate, createCategory)    // create a new category
+router.delete('/delete/:categoryid', limiter, authenticate, deleteCategory) // delete a category
 
 
 export default router

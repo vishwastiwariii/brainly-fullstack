@@ -3,6 +3,7 @@
 import express from "express"
 import { rateLimit } from "express-rate-limit"
 import { authenticate } from "../middlewares/authMiddleware.js"
+import { createCard, deleteCard, getAllCards, getAllCardsByCategory, updateCard } from "../controllers/cardController.js"
 
 
 let limiter = rateLimit(
@@ -18,11 +19,11 @@ const router = express.Router()
 
 // card Routes
 
-router.get('/', limiter, authenticate) // fetching all cards of a user
-router.post('/create', limiter, authenticate)   // create the card
-router.patch('/update/:id', limiter, authenticate)  // update the card
-router.delete('/delete/:id', limiter, authenticate)  // delete the card
-router.get('/:categoryTitle', limiter, authenticate)  // fetching all cards by category
+router.get('/', limiter, authenticate, getAllCards) // fetching all cards of a user
+router.post('/create', limiter, authenticate, createCard)   // create the card
+router.patch('/update/:id', limiter, authenticate, updateCard)  // update the card
+router.delete('/delete/:id', limiter, authenticate, deleteCard)  // delete the card
+router.get('/:categoryId', limiter, authenticate, getAllCardsByCategory)  // fetching all cards by category
 
 
 
