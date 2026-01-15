@@ -18,6 +18,11 @@ const UserSchema = new Schema ({
         type: String,
         required: [true , 'Password is required']
     }, 
+
+    hash: {
+        type: String,
+        unique: true, 
+    }
 })
 
 const User = mongoose.model("User", UserSchema)
